@@ -11,6 +11,7 @@ RUN set -x; \
             npm \
             python-support \
             python-pyinotify \
+            pip \
         && npm install -g less less-plugin-clean-css \
         && ln -s /usr/bin/nodejs /usr/bin/node \
         && curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb \
@@ -29,6 +30,7 @@ RUN set -x; \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
+
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
