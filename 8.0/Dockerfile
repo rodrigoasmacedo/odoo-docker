@@ -2,6 +2,10 @@ FROM debian:jessie
 MAINTAINER Odoo S.A. <info@odoo.com>
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
+RUN dpkg-reconfigure locales && \
+    locale-gen pt_BR.UTF-8 && \
+    /usr/sbin/update-locale LANG=pt_BR.UTF-8
+
 RUN set -x; \
         apt-get update \
         && apt-get install -y --no-install-recommends \
