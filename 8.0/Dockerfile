@@ -35,6 +35,16 @@ RUN set -x; \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
+#instal brazilian localization dependencies
+RUN set -x; \
+    apt-get update && \
+	apt-get -yq install \
+	python-dev \ 
+	libxmlsec1-dev \
+	libxml2-dev \
+	&& pip install pyxmlsec --allow-unverified pyxmlsec \
+		pySPED
+
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
