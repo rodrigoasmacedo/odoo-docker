@@ -44,6 +44,15 @@ RUN set -x; \
 	libxml2-dev \
 	&& pip install pyxmlsec --allow-unverified pyxmlsec \
 		pySPED
+#install brazilian localization
+
+RUN apt-get update && \
+	  apt-get -yq install git
+	 
+RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/l10n-brazil.git  /opt/addons/l10n-brazil 
+RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/odoo-brazil-eletronic-documents.git /opt/addons/odoo-brazil-eletronic-documents
+RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/account-fiscal-rule.git /opt/addons/account-fiscal-rule
+RUN git clone -b 8.0 https://github.com/OCA/server-tools.git /opt/addons/server-tools 
 
 
 # Copy entrypoint script and Odoo configuration file
