@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ubuntu:14.04
 MAINTAINER João Paulo de Souza <vibedigital@gmail.com>
 
 # generate locales
