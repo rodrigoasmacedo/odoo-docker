@@ -11,7 +11,7 @@ RUN set -x; \
         && apt-get install -y --no-install-recommends \
             ca-certificates \
             curl \
-            pip \
+            python-pip \
             nodejs \
             npm \
             python-support \
