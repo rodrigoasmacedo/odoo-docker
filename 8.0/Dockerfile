@@ -2,8 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER João Paulo de Souza <vibedigital@gmail.com>
 
 # generate locales
-RUN locale-gen pt_BR.UTF-8 && update-locale
-RUN echo 'LANG="pt_BR.UTF-8"' > /etc/default/locale
+RUN  locale-gen pt_BR; locale-gen pt_BR.UTF-8; sudo dpkg-reconfigure locales; sudo update-locale LANG=pt_BR.UTF-8
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
@@ -16,6 +15,7 @@ RUN set -x; \
             npm \
             python-support \
             python-pyinotify \
+	    python-openssl \
         && npm install -g less less-plugin-clean-css \
         && ln -s /usr/bin/nodejs /usr/bin/node \
         && curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb \
@@ -43,16 +43,16 @@ RUN set -x; \
 	libxmlsec1-dev \
 	libxml2-dev \
 	&& pip install pyxmlsec --allow-unverified pyxmlsec \
+		lxml \
 		pySPED
 #install brazilian localization
-
 RUN apt-get update && \
 	  apt-get -yq install git
 	 
-RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/l10n-brazil.git  /opt/addons/l10n-brazil 
-RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/odoo-brazil-eletronic-documents.git /opt/addons/odoo-brazil-eletronic-documents
-RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/account-fiscal-rule.git /opt/addons/account-fiscal-rule
-RUN git clone -b 8.0 https://github.com/OCA/server-tools.git /opt/addons/server-tools 
+RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/l10n-brazil.git  /mnt/extra-addons/l10n-brazil 
+RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/odoo-brazil-eletronic-documents.git /mnt/extra-addons/odoo-brazil-eletronic-documents
+RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/account-fiscal-rule.git /mnt/extra-addons/account-fiscal-rule
+RUN git clone -b 8.0 https://github.com/OCA/server-tools.git /mnt/extra-addons/server-tools 
 
 
 # Copy entrypoint script and Odoo configuration file
