@@ -26,10 +26,11 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 # Install Odoo
+ENV ODOO_BRANCH 8.0
 ENV ODOO_VERSION 8.0
-ENV ODOO_RELEASE 20150401
+ENV ODOO_RELEASE latest
 RUN set -x; \
-        curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
+        curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_BRANCH}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
         && dpkg --force-depends -i odoo.deb \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
@@ -45,6 +46,7 @@ RUN set -x; \
 	&& pip install pyxmlsec --allow-unverified pyxmlsec \
 		lxml \
 		pySPED
+
 #install brazilian localization
 RUN apt-get update && \
 	  apt-get -yq install git
@@ -53,7 +55,6 @@ RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/l10n-brazil.git  /mnt/ext
 RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/odoo-brazil-eletronic-documents.git /mnt/extra-addons/odoo-brazil-eletronic-documents
 RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/account-fiscal-rule.git /mnt/extra-addons/account-fiscal-rule
 RUN git clone -b 8.0 https://github.com/OCA/server-tools.git /mnt/extra-addons/server-tools 
-
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
