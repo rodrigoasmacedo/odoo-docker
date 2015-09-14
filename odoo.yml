@@ -1,0 +1,20 @@
+db:
+  image: 'postgres:latest'
+  environment:
+    - POSTGRES_PASSWORD=odoo
+    - POSTGRES_USER=odoo
+https:
+  image: 'yajo/https-proxy:latest'
+  environment:
+    - PORT=8069
+  links:
+    - 'odoo:www'
+  ports:
+    - '80:80'
+    - '443:443'
+odoo:
+  image: 'joaopaulosouza/odoo-docker:8.0'
+  links:
+    - db
+  ports:
+    - '8069:8069'
