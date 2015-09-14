@@ -26,8 +26,8 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 # Install Odoo
-ENV ODOO_BRANCH 8.0
-ENV ODOO_VERSION 8.0
+ENV ODOO_BRANCH 9.0
+ENV ODOO_VERSION 9.0
 ENV ODOO_RELEASE latest
 RUN set -x; \
         curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_BRANCH}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
