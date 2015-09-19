@@ -13,7 +13,7 @@ https:
     - '80:80'
     - '443:443'
 odoo:
-  image: 'joaopaulosouza/odoo-docker:8.0'
+  image: 'joaopaulosouza/odoo-docker:8.0-br'
   links:
     - db
   ports:
