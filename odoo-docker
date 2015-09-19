@@ -3,12 +3,10 @@ db:
   environment:
     - POSTGRES_PASSWORD=odoo
     - POSTGRES_USER=odoo
-https:
-  image: 'yajo/https-proxy:latest'
-  environment:
-    - PORT=8069
+proxy:
+  image: 'tutum/haproxy:0.2'
   links:
-    - 'odoo:www'
+    - 'odoo:odoo'
   ports:
     - '80:80'
     - '443:443'
