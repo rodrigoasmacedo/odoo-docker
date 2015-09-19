@@ -15,3 +15,5 @@ odoo:
   target_num_containers: 2
   links:
     - db
+tags:
+    - staging
