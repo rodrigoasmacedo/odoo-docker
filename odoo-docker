@@ -6,7 +6,7 @@ db:
 proxy:
   image: 'tutum/haproxy:0.2'
   links:
-    - 'odoo:osoo'
+    - 'odoo:odoo'
   ports:
     - '80:80'
     - '443:443'
