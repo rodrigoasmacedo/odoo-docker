@@ -14,7 +14,6 @@ https:
     - '443:443'
 odoo:
   image: 'joaopaulosouza/odoo-docker:8.0-br'
+  target_num_containers: 2
   links:
     - db
-  ports:
-    - '8069:8069'
