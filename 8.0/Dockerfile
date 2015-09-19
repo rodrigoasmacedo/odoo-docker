@@ -51,10 +51,10 @@ RUN set -x; \
 RUN apt-get update && \
 	  apt-get -yq install git
 	 
-RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/l10n-brazil.git  /mnt/extra-addons/l10n-brazil 
-RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/odoo-brazil-eletronic-documents.git /mnt/extra-addons/odoo-brazil-eletronic-documents
-RUN git clone -b 8.0 https://github.com/JoaoPauloSouza/account-fiscal-rule.git /mnt/extra-addons/account-fiscal-rule
-RUN git clone -b 8.0 https://github.com/OCA/server-tools.git /mnt/extra-addons/server-tools 
+RUN git clone -b 8.0 https://github.com/Trust-Code/l10n-brazil.git /mnt/extra-addons/l10n-brazil 
+RUN git clone -b 8.0 https://github.com/Trust-Code/odoo-brazil-eletronic-documents.git /mnt/extra-addons/odoo-brazil-eletronic-documents
+RUN git clone -b 8.0 https://github.com/Trust-Code/server-tools.git /mnt/extra-addons/server-tools
+RUN git clone -b 8.0 https://github.com/Trust-Code/account-fiscal-rule.git /mnt/extra-addons/account-fiscal-rule
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
