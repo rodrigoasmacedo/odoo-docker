@@ -3,6 +3,8 @@ db:
   environment:
     - POSTGRES_PASSWORD=odoo
     - POSTGRES_USER=odoo
+  tags:
+    - staging
 proxy:
   image: 'tutum/haproxy:0.2'
   links:
@@ -10,10 +12,12 @@ proxy:
   ports:
     - '80:80'
     - '443:443'
+  tags:
+    - staging
 odoo:
   image: 'joaopaulosouza/odoo-docker:8.0-br'
-  target_num_containers: 2
-  links:
+  target_num_containers: 1
+  links:  
     - db
-tags:
+  tags:
     - staging
