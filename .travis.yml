@@ -1,2 +1,2 @@
 notifications:
-  webhooks: http://104.236.200.16:8001/
+  webhooks: http://104.236.200.16:8002/
