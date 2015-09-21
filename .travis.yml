@@ -14,7 +14,7 @@ addons:
 
 env:
   - VERSION="8.0" LINT_CHECK="1"
-  - VERSION="8.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
+  - VERSION="8.0" ODOO_REPO="OCA/OCB" LINT_CHECK="1"
 
 
 install:
