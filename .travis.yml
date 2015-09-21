@@ -5,7 +5,7 @@ python:
 
 sudo:required
 install:
-  - apt-get install ntp	
+  - sudo apt-get install ntp	
 
 notifications:
   webhooks: http://104.236.200.16:8002/
