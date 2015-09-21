@@ -1,2 +1,7 @@
+language: python
+
+python:
+  - "2.7"
+
 notifications:
   webhooks: http://104.236.200.16:8002/
