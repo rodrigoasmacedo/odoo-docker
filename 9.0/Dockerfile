@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER João Paulo de Souza <vibedigital@gmail.com>
 
 # generate locales
-RUN  locale-gen pt_BR; locale-gen pt_BR.UTF-8; sudo dpkg-reconfigure locales; sudo update-locale LANG=pt_BR.UTF-8
+#RUN  locale-gen pt_BR; locale-gen pt_BR.UTF-8; sudo dpkg-reconfigure locales; sudo update-locale LANG=pt_BR.UTF-8
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
@@ -26,8 +26,8 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 # Install Odoo
-ENV ODOO_BRANCH 8.0
-ENV ODOO_VERSION 8.0
+ENV ODOO_BRANCH 9.0
+ENV ODOO_VERSION 9.0
 ENV ODOO_RELEASE latest
 RUN set -x; \
         curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_BRANCH}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
@@ -35,26 +35,6 @@ RUN set -x; \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
-
-#instal brazilian localization dependencies
-RUN set -x; \
-    apt-get update && \
-	apt-get -yq install \
-	python-dev \ 
-	libxmlsec1-dev \
-	libxml2-dev \
-	&& pip install pyxmlsec --allow-unverified pyxmlsec \
-		lxml \
-		pySPED
-
-#install brazilian localization
-RUN apt-get update && \
-	  apt-get -yq install git
-	 
-RUN git clone -b 8.0 https://github.com/Trust-Code/l10n-brazil.git /mnt/extra-addons/l10n-brazil 
-RUN git clone -b 8.0 https://github.com/Trust-Code/odoo-brazil-eletronic-documents.git /mnt/extra-addons/odoo-brazil-eletronic-documents
-RUN git clone -b 8.0 https://github.com/Trust-Code/server-tools.git /mnt/extra-addons/server-tools
-RUN git clone -b 8.0 https://github.com/Trust-Code/account-fiscal-rule.git /mnt/extra-addons/account-fiscal-rule
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /

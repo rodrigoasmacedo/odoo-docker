@@ -15,8 +15,10 @@ proxy:
   tags:
     - staging
 odoo:
-  image: 'joaopaulosouza/odoo-docker:8.0-br'
+  image: 'joaopaulosouza/odoo-docker:9.0'
   target_num_containers: 1
+  ports:
+    - '8069:8069'
   links:  
     - db
   tags:
