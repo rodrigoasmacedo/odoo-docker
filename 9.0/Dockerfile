@@ -1,8 +1,5 @@
-FROM ubuntu:14.04
-MAINTAINER João Paulo de Souza <vibedigital@gmail.com>
-
-# generate locales
-#RUN  locale-gen pt_BR; locale-gen pt_BR.UTF-8; sudo dpkg-reconfigure locales; sudo update-locale LANG=pt_BR.UTF-8
+FROM debian:jessie
+MAINTAINER Odoo S.A. <info@odoo.com>
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
@@ -10,12 +7,10 @@ RUN set -x; \
         && apt-get install -y --no-install-recommends \
             ca-certificates \
             curl \
-            python-pip \
             nodejs \
             npm \
             python-support \
             python-pyinotify \
-	    python-openssl \
         && npm install -g less less-plugin-clean-css \
         && ln -s /usr/bin/nodejs /usr/bin/node \
         && curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb \
@@ -26,11 +21,10 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 # Install Odoo
-ENV ODOO_BRANCH 9.0
 ENV ODOO_VERSION 9.0
 ENV ODOO_RELEASE latest
 RUN set -x; \
-        curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_BRANCH}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
+        curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
         && dpkg --force-depends -i odoo.deb \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
